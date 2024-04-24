@@ -2,7 +2,7 @@ version: '3'
 services:
 
   nginx:
-    image: nginx:atest
+    image: nginx:latest
     container_name: callme-nginx
     restart: always
     ports:
