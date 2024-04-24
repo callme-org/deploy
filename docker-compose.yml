@@ -7,6 +7,9 @@ services:
     restart: always
     ports:
       - "80:80"
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
     build:
