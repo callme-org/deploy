@@ -1,7 +1,9 @@
 version: '3'
 services:
-  callme-db:
+
+  db:
     image: mysql:latest
+    name: callme-db
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
@@ -11,9 +13,11 @@ services:
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
-      - callme
+      - callme_internal
+
   auth:
     image: callme-auth:latest
+    name: callme-auth
     build:
       context: ./auth
       dockerfile: Dockerfile
@@ -21,18 +25,18 @@ services:
       - "80:8080"
     networks:
       - external
-      - callme
-    environment:
-      INTERNAL_NETWORK: ${INTERNAL_NETWORK}
+      - callme_internal
+
   user:
     image: callme-user:latest
+    name: callme-user
     build:
       context: ./user
       dockerfile: Dockerfile
     depends_on:
-      - callme-db
+      - db
     networks:
-      - callme
+      - callme_internal
     environment:
       DATABASE_HOST: "callme-db"
       DATABASE_PORT: ${DATABASE_PORT}
@@ -43,5 +47,6 @@ services:
 networks:
   external:
     driver: bridge
-  callme:
+  callme_internal:
+    name: callme-internal
     driver: bridge
