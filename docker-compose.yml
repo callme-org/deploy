@@ -1,10 +1,24 @@
 version: '3'
 services:
 
+  nginx:
+    image: nginx:atest
+    name: callem-nginx
+    restart: always
+    ports:
+      - "80:80"
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    networks:
+      - external
+
   db:
     image: mysql:latest
     name: callme-db
     restart: always
+    depends_on:
+      - nginx
     environment:
       MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
       MYSQL_DATABASE: ${DATABASE_NAME}
@@ -15,16 +29,26 @@ services:
     networks:
       - callme_internal
 
+  mobile-bff:
+    image: callme-mobile-bff:latest
+    name: callme-mobile-bff
+    build:
+      context: ./mobile-bff
+      dockerfile: Dockerfile
+    depends_on:
+      - nginx
+    networks:
+      - callme_internal
+
   auth:
     image: callme-auth:latest
     name: callme-auth
     build:
       context: ./auth
       dockerfile: Dockerfile
-    ports:
-      - "80:8080"
+    depends_on:
+      - mobile-bff
     networks:
-      - external
       - callme_internal
 
   user:
@@ -34,7 +58,7 @@ services:
       context: ./user
       dockerfile: Dockerfile
     depends_on:
-      - db
+      - mobile-bff
     networks:
       - callme_internal
     environment:
@@ -46,6 +70,7 @@ services:
 
 networks:
   external:
+    name: callme-external
     driver: bridge
   callme_internal:
     name: callme-internal
