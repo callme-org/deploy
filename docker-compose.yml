@@ -12,6 +12,7 @@ services:
       dockerfile: Dockerfile
     networks:
       - external
+      - callme_internal
 
   db:
     image: mysql:latest
