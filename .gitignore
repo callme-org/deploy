@@ -3,4 +3,5 @@
 !/docker-compose.yml
 !/.env
 !/init.sql
+!/nginx.conf
 !/README.md
