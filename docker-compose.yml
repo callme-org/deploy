@@ -11,7 +11,7 @@ services:
       context: ./nginx
       dockerfile: Dockerfile
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     build:
       context: ./nginx
       dockerfile: Dockerfile
