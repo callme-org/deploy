@@ -3,7 +3,7 @@ services:
 
   nginx:
     image: nginx:atest
-    name: callem-nginx
+    container_name: callme-nginx
     restart: always
     ports:
       - "80:80"
@@ -15,7 +15,7 @@ services:
 
   db:
     image: mysql:latest
-    name: callme-db
+    container_name: callme-db
     restart: always
     depends_on:
       - nginx
@@ -31,7 +31,7 @@ services:
 
   mobile-bff:
     image: callme-mobile-bff:latest
-    name: callme-mobile-bff
+    container_name: callme-mobile-bff
     build:
       context: ./mobile-bff
       dockerfile: Dockerfile
@@ -42,7 +42,7 @@ services:
 
   auth:
     image: callme-auth:latest
-    name: callme-auth
+    container_name: callme-auth
     build:
       context: ./auth
       dockerfile: Dockerfile
@@ -53,7 +53,7 @@ services:
 
   user:
     image: callme-user:latest
-    name: callme-user
+    container_name: callme-user
     build:
       context: ./user
       dockerfile: Dockerfile
