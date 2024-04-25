@@ -15,7 +15,7 @@ services:
       file: docker-compose-routing.yml
       service: common-bff
     depends_on:
-      - callme-user
+      - user
 
   mobile-bff:
     extends:
@@ -27,7 +27,7 @@ services:
       file: docker-compose-routing.yml
       service: open-bff
     depends_on:
-      - callme-auth
+      - auth
 
   auth:
     extends:
