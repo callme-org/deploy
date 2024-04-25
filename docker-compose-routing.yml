@@ -1,0 +1,48 @@
+version: '3'
+services:
+
+  nginx:
+    image: nginx:latest
+    container_name: callme-nginx
+    restart: always
+    ports:
+      - "80:80"
+    build: ./nginx
+    depends_on:
+      - common-bff
+      - mobile-bff
+      - open-bff
+    networks:
+      - external
+      - callme_internal
+
+  common-bff:
+    image: callme-common-bff:latest
+    container_name: callme-common-bff
+    depends_on:
+      - callme-user
+    build:
+      context: ./common-bff
+      dockerfile: Dockerfile
+    networks:
+      - callme_internal
+      
+  mobile-bff:
+    image: callme-mobile-bff:latest
+    container_name: callme-mobile-bff
+    build:
+      context: ./mobile-bff
+      dockerfile: Dockerfile
+    networks:
+      - callme_internal
+
+  open-bff:
+    image: callme-open-bff:latest
+    container_name: callme-open-bff
+    build:
+      context: ./open-bff
+      dockerfile: Dockerfile
+    depends_on:
+      - callme-auth
+    networks:
+      - callme_internal

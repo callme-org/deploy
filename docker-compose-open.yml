@@ -1,0 +1,11 @@
+version: '3'
+services:
+
+  auth:
+    image: callme-auth:latest
+    container_name: callme-auth
+    build:
+      context: ./auth
+      dockerfile: Dockerfile
+    networks:
+      - callme_internal

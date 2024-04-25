@@ -1,0 +1,34 @@
+version: '3'
+services:
+ 
+  db:
+    image: mysql:latest
+    container_name: callme-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+      MYSQL_DATABASE: ${DATABASE_NAME}
+      MYSQL_USER: ${DATABASE_USERNAME}
+      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - callme_internal
+
+  user:
+    image: callme-user:latest
+    container_name: callme-user
+    build:
+      context: ./user
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    networks:
+      - callme_internal
+    environment:
+      DATABASE_HOST: "callme-db"
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+            

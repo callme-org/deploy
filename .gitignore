@@ -1,6 +1,9 @@
 /*
 !/.gitignore
 !/docker-compose.yml
+!/docker-compose-routing.yml
+!/docker-compose-common.yml
+!/docker-compose-open.yml
 !/.env
 !/init.sql
 !/nginx.conf

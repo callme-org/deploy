@@ -1,75 +1,33 @@
 version: '3'
 services:
 
-  nginx:
-    image: nginx:latest
-    container_name: callme-nginx
-    restart: always
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
-    networks:
-      - external
-      - callme_internal
+  extends:
+    file: docker-compose-routing.yml
+    service: nginx
 
-  db:
-    image: mysql:latest
-    container_name: callme-db
-    restart: always
-    depends_on:
-      - nginx
-    environment:
-      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
-      MYSQL_DATABASE: ${DATABASE_NAME}
-      MYSQL_USER: ${DATABASE_USERNAME}
-      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
-    volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    networks:
-      - callme_internal
+  extends:
+    file: docker-compose-routing.yml
+    service: common-bff
 
-  mobile-bff:
-    image: callme-mobile-bff:latest
-    container_name: callme-mobile-bff
-    build:
-      context: ./mobile-bff
-      dockerfile: Dockerfile
-    depends_on:
-      - nginx
-    networks:
-      - callme_internal
+  extends:
+    file: docker-compose-routing.yml
+    service: mobile-bff
 
-  auth:
-    image: callme-auth:latest
-    container_name: callme-auth
-    build:
-      context: ./auth
-      dockerfile: Dockerfile
-    depends_on:
-      - mobile-bff
-    networks:
-      - callme_internal
+  extends:
+    file: docker-compose-routing.yml
+    service: open-bff
 
-  user:
-    image: callme-user:latest
-    container_name: callme-user
-    build:
-      context: ./user
-      dockerfile: Dockerfile
-    depends_on:
-      - mobile-bff
-    networks:
-      - callme_internal
-    environment:
-      DATABASE_HOST: "callme-db"
-      DATABASE_PORT: ${DATABASE_PORT}
-      DATABASE_NAME: ${DATABASE_NAME}
-      DATABASE_USERNAME: ${DATABASE_USERNAME}
-      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+  extends:
+    file: docker-compose-open.yml
+    service: auth
+
+  extends:
+    file: docker-compose-common.yml
+    service: db
+
+  extends:
+    file: docker-compose-common.yml
+    service: user
 
 networks:
   external:
