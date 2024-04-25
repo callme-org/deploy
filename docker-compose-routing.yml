@@ -8,10 +8,6 @@ services:
     ports:
       - "80:80"
     build: ./nginx
-    depends_on:
-      - common-bff
-      - mobile-bff
-      - open-bff
     networks:
       - external
       - callme_internal
@@ -19,8 +15,6 @@ services:
   common-bff:
     image: callme-common-bff:latest
     container_name: callme-common-bff
-    depends_on:
-      - callme-user
     build:
       context: ./common-bff
       dockerfile: Dockerfile
@@ -42,7 +36,5 @@ services:
     build:
       context: ./open-bff
       dockerfile: Dockerfile
-    depends_on:
-      - callme-auth
     networks:
       - callme_internal

@@ -21,8 +21,6 @@ services:
     build:
       context: ./user
       dockerfile: Dockerfile
-    depends_on:
-      - db
     networks:
       - callme_internal
     environment:

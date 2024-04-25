@@ -5,11 +5,17 @@ services:
     extends:
       file: docker-compose-routing.yml
       service: nginx
+    depends_on:
+      - common-bff
+      - mobile-bff
+      - open-bff
 
   common-bff:
     extends:
       file: docker-compose-routing.yml
       service: common-bff
+    depends_on:
+      - callme-user
 
   mobile-bff:
     extends:
@@ -20,6 +26,8 @@ services:
     extends:
       file: docker-compose-routing.yml
       service: open-bff
+    depends_on:
+      - callme-auth
 
   auth:
     extends:
@@ -35,6 +43,8 @@ services:
     extends:
       file: docker-compose-common.yml
       service: user
+    depends_on:
+      - db
 
 networks:
   external:
