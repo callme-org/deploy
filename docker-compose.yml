@@ -1,33 +1,40 @@
 version: '3'
 services:
 
-  extends:
-    file: docker-compose-routing.yml
-    service: nginx
+  nginx:
+    extends:
+      file: docker-compose-routing.yml
+      service: nginx
 
-  extends:
-    file: docker-compose-routing.yml
-    service: common-bff
+  common-bff:
+    extends:
+      file: docker-compose-routing.yml
+      service: common-bff
 
-  extends:
-    file: docker-compose-routing.yml
-    service: mobile-bff
+  mobile-bff:
+    extends:
+      file: docker-compose-routing.yml
+      service: mobile-bff
 
-  extends:
-    file: docker-compose-routing.yml
-    service: open-bff
+  open-bff:
+    extends:
+      file: docker-compose-routing.yml
+      service: open-bff
 
-  extends:
-    file: docker-compose-open.yml
-    service: auth
+  auth:
+    extends:
+      file: docker-compose-open.yml
+      service: auth
 
-  extends:
-    file: docker-compose-common.yml
-    service: db
+  db:
+    extends:
+      file: docker-compose-common.yml
+      service: db
 
-  extends:
-    file: docker-compose-common.yml
-    service: user
+  user:
+    extends:
+      file: docker-compose-common.yml
+      service: user
 
 networks:
   external:
