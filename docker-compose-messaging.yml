@@ -3,9 +3,6 @@ version: '3'
 services:
   stun-turn:
     image: coturn/coturn
-    ports:
-      - "3478:3478"
-      - "3478:3478/udp"
     environment:
       HOST_IP: ${HOST_IP}
       DATABASE_HOST: "callme-db"
