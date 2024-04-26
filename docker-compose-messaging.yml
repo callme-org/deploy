@@ -3,7 +3,6 @@ services:
   
   stun-turn:
     build: ./stun-turn
-    volumes:
-      - ./turnserver.conf:/etc/turnserver.conf
+    container_name: callme-stun-turn
     networks:
       - external
