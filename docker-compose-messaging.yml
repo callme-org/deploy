@@ -4,6 +4,12 @@ services:
   stun-turn:
     build: ./stun-turn
     container_name: callme-stun-turn
+    environment:
+      DATABASE_HOST: "callme-db"
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
     ports:
       - "3478:3478"
     networks:
