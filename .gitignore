@@ -4,6 +4,7 @@
 !/docker-compose-routing.yml
 !/docker-compose-common.yml
 !/docker-compose-open.yml
+!/docker-compose-messaging.yml
 !/.env
 !/init.sql
 !/nginx.conf

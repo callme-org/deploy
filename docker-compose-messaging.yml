@@ -1,0 +1,9 @@
+version: '3'
+services:
+  
+  stun-turn:
+    build: ./stun-turn
+    volumes:
+      - ./turnserver.conf:/etc/turnserver.conf
+    networks:
+      - external

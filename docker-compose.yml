@@ -46,6 +46,11 @@ services:
     depends_on:
       - db
 
+  stun-turn:
+    extends:
+      file: docker-compose-messaging.yml
+      service: stun-turn
+
 networks:
   external:
     name: callme-external
