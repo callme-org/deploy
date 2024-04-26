@@ -3,6 +3,7 @@ version: '3'
 services:
   stun-turn:
     image: coturn/coturn
+    container_name: callme-stun-turn
     environment:
       HOST_IP: ${HOST_IP}
       DATABASE_HOST: "callme-db"
