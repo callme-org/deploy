@@ -8,3 +8,4 @@ services:
       - "3478:3478"
     networks:
       - external
+      - callme_internal
