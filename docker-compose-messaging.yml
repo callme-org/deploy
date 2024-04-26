@@ -4,5 +4,7 @@ services:
   stun-turn:
     build: ./stun-turn
     container_name: callme-stun-turn
+    ports:
+      - "3478:3478"
     networks:
       - external
