@@ -15,3 +15,12 @@ services:
       - ./stun-turn/turn.conf:/etc/turnserver.conf
     restart: unless-stopped
     network_mode: "host"
+
+  push:
+    image: callme-push:latest
+    container_name: callme-push
+    build:
+      context: ./push
+      dockerfile: Dockerfile
+    networks:
+      - callme_internal
