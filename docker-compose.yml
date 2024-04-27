@@ -51,6 +51,11 @@ services:
       file: docker-compose-messaging.yml
       service: stun-turn
 
+  push:
+    extends:
+      file: docker-compose-messaging.yml
+      service: push
+
 networks:
   external:
     name: callme-external
