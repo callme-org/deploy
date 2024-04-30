@@ -50,6 +50,8 @@ services:
     extends:
       file: docker-compose-messaging.yml
       service: stun-turn
+    depends_on:
+      - db
 
   push:
     extends:
