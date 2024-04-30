@@ -7,7 +7,7 @@ services:
     restart: always
     ports:
       - "80:80"
-    enviroment:
+    environment:
       HOST_IP: ${HOST_IP}
     build: ./nginx
     networks:
