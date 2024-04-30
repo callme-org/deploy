@@ -6,6 +6,9 @@ services:
     build:
       context: ./stun-turn
       dockerfile: Dockerfile
+    ports:
+      - "3478:3478"
+      - "5349:5349"
     environment:
       HOST_IP: ${HOST_IP}
       DATABASE_HOST: "callme-db"
