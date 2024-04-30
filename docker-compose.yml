@@ -62,4 +62,5 @@ networks:
     driver: bridge
   callme_internal:
     name: callme-internal
+    internal: true
     driver: bridge

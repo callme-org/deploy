@@ -8,7 +8,9 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3478:3478"
+      - "3478:3478/udp"
       - "5349:5349"
+      - "5349:5349/udp"
     environment:
       HOST_IP: ${HOST_IP}
       DATABASE_HOST: "callme-db"
