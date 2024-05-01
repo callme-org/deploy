@@ -30,3 +30,26 @@ services:
       DATABASE_USERNAME: ${DATABASE_USERNAME}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
             
+  turn-user:
+    image: callme-turn-user:latest
+    container_name: callme-turn-user
+    build:
+      context: ./turn-user
+      dockerfile: Dockerfile
+    networks:
+      - callme_internal
+    environment:
+      DATABASE_HOST: "callme-db"
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+
+  tokenization:
+    image: callme-tokenization:latest
+    container_name: callme-tokenization
+    build:
+      context: ./tokenization
+      dockerfile: Dockerfile
+    networks:
+      - callme_internal
