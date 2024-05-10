@@ -68,6 +68,13 @@ services:
     depends_on:
       - db
 
+  messaging-user:
+    extends:
+      file: docker-compose-common.yml
+      service: messaging-user
+    depends_on:
+      - db
+
   tokenization:
     extends:
       file: docker-compose-common.yml

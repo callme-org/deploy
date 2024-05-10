@@ -45,6 +45,21 @@ services:
       DATABASE_USERNAME: ${DATABASE_USERNAME}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
 
+  messaging-user:
+    image: callme-messaging-user:latest
+    container_name: callme-messaging-user
+    build:
+      context: ./messaging-user
+      dockerfile: Dockerfile
+    networks:
+      - callme_internal
+    environment:
+      DATABASE_HOST: "callme-db"
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+
   tokenization:
     image: callme-tokenization:latest
     container_name: callme-tokenization
