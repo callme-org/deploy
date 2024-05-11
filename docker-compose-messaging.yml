@@ -31,3 +31,13 @@ services:
       dockerfile: Dockerfile
     networks:
       - callme_internal
+
+  call-manager:
+    image: callme-call-manager:latest
+    container_name: callme-call-manager
+    build:
+      context: ./call-manager
+      dockerfile: Dockerfile
+    networks:
+      - external
+      - callme_internal

@@ -80,6 +80,10 @@ services:
       file: docker-compose-common.yml
       service: tokenization
 
+  call-manager:
+    extends: docker-compose-messaging.yml
+    service: call-manager
+
 networks:
   external:
     name: callme-external
