@@ -81,8 +81,9 @@ services:
       service: tokenization
 
   call-manager:
-    extends: docker-compose-messaging.yml
-    service: call-manager
+    extends:
+      file: docker-compose-messaging.yml
+      service: call-manager
 
 networks:
   external:
