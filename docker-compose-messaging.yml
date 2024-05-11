@@ -39,5 +39,4 @@ services:
       context: ./call-manager
       dockerfile: Dockerfile
     networks:
-      - external
       - callme_internal
